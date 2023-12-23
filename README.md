@@ -31,6 +31,8 @@ When you see the `Hit [Enter] to boot immediately, or any other key for command 
 ```
 load geom_uzip
 load -t md_image /root.img.uzip
+set vfs.root.mountfrom="ufs:/dev/md0.uzip" # this may optimized by modify /boot/loader.conf
+set vfs.root.mountfrom.options="rw"
 boot -v
 ```
 
@@ -39,11 +41,6 @@ Notes:
 - `root.img.uzip` is large, and will take a while to load (over 10 minutes)
 - If you want to drop straight into the kernel debugger as soon as possible to trace hardware probing, replace the last step with ```boot -d``` (-v is verbose, which is often useful)
 
-At the `mountroot>` prompt:
-
-```
-ufs:/dev/md0.uzip
-```
 Note the ```uzip``` extension, not a ```zip``` extension, and take your time typing this; the mountroot prompt doesn't have working terminal control, so backspacing or using arrow keys will mess up the entry.
 
 Watch the kernel messages fly by, until finally:
